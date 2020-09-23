@@ -1,6 +1,7 @@
 defmodule BijectiveMapping do
   # implementation of the following:
   # https://stackoverflow.com/questions/742013/how-do-i-create-a-url-shortener
+  # also, decode algorithm from "Horner's Rule"
 
   @alpha_set ~w(a b c d e f g h i j k l m n o p q r s t u v w x y z
     A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
