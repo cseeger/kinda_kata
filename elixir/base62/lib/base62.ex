@@ -31,10 +31,8 @@ defmodule Base62 do
   end
 
   def accumulate_decode(chars, acc) when length(chars) == 0, do: acc
-  def accumulate_decode(chars, acc) do
-    [head | remaining_chars] = chars
+  def accumulate_decode([head | remaining_chars], acc) do
     acc = (acc * @radix) + head
-
     accumulate_decode(remaining_chars, acc)
   end
 
