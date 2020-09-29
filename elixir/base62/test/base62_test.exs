@@ -28,6 +28,8 @@ defmodule Base62Test do
 
   describe "accumulate_decode/2" do
     test "returns the base10 from given base62" do
+      assert Base62.accumulate_decode([0], 0) == 0
+      assert Base62.accumulate_decode([1], 0) == 1
       assert Base62.accumulate_decode([2, 1], 0) == 125
       assert Base62.accumulate_decode([25, 51, 0], 0) == 99262
     end

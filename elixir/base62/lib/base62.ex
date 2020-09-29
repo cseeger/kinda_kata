@@ -8,6 +8,8 @@ defmodule Base62 do
   # diff-31f9094877d525a1b8387d4135042006R1
   #
   # also, decode algorithm from "Horner's Rule"
+  #   source: "Number Systems and Radix Conversion"
+  #   author: Sanjay Rajopadhye, Colorado State University
 
   @mapping 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
   @radix 62
@@ -21,19 +23,17 @@ defmodule Base62 do
   end
 
   def decode(encoded) do
-    String.to_charlist(encoded)
-    |> char_indexes()
-    |> accumulate_decode(0)
+    [head | remaining_chars] = String.to_charlist(encoded)
+                               |> char_indexes()
+
+    accumulate_decode(remaining_chars, head)
     |> trunc()
   end
 
   def accumulate_decode(chars, acc) when length(chars) == 0, do: acc
-
   def accumulate_decode(chars, acc) do
-    square = :math.pow(@radix, length(chars) - 1)
     [head | remaining_chars] = chars
-    result = head * square
-    acc = acc + result
+    acc = (acc * @radix) + head
 
     accumulate_decode(remaining_chars, acc)
   end
